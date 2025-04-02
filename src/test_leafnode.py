@@ -10,7 +10,7 @@ class LeafNodeTest(unittest.TestCase):
     def test_assert_equal(self):
         node1 = LeafNode("p","Hello world")
         node2 = LeafNode("p", "Hello world")
-        self.assertEqual(print(node1), print(node2))
+        self.assertEqual(repr(node1), repr(node2))
 
     def test_assert_not_equal(self):
         node1 = LeafNode("p", "Whahoo!")
