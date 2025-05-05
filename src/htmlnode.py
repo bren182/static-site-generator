@@ -17,5 +17,5 @@ class HTMLNode():
         return final_props.rstrip()
 
     def __repr__(self):
-        return f"Tag: {self.tag} Value: {self.value} Children: {self.children} Props: {self.props}"
+        return f"HTMLNode({self.tag}, {self.value}, children: {self.children}, {self.props})"
 

@@ -14,5 +14,6 @@ class LeafNode(HTMLNode):
             return f"<{self.tag}>{self.value}</{self.tag}>"
         
         return f"<{self.tag} {super().props_to_html().strip()}>{self.value}</{self.tag}>"
-
+# <a href="https://google.com">
+# <a>
 
