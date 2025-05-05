@@ -1,6 +1,6 @@
 import unittest
-from parentnode import ParentNode
-from leafnode import LeafNode
+from htmlnode import ParentNode, LeafNode
+
 class ParentNodeTest(unittest.TestCase):
     def test_can_construct(self):
         myparent = ParentNode("h1", "Heading1",None)
