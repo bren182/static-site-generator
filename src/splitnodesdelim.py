@@ -19,12 +19,3 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 else:
                     final_nodes.append(TextNode(split_delim[i], text_type))
             return final_nodes
-
-            
-
-
-        
-            
-
-
-             
