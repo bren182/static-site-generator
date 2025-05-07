@@ -1,6 +1,6 @@
 import unittest
 
-from src.splitnodesdelim import split_nodes_delimiter
+from src.splitnodesdelim import split_nodes_delimiter, split_nodes_image, split_nodes_link
 from src.textnode import TextNode, TextType
 
 class TestSplitNodesDelim(unittest.TestCase):
@@ -43,6 +43,25 @@ class TestSplitNodesDelim(unittest.TestCase):
             TextNode("stuff", TextType.ITALIC_TEXT),
             TextNode("**", TextType.NORMAL_TEXT)
         ])
+
+    
+    def test_split_images(self):
+        node = TextNode(
+            "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)",
+            TextType.NORMAL_TEXT,
+        )
+        new_nodes = split_nodes_image([node])
+        self.assertListEqual(
+            [
+                TextNode("This is text with an ", TextType.NORMAL_TEXT),
+                TextNode("image", TextType.IMAGES, "https://i.imgur.com/zjjcJKZ.png"),
+                TextNode(" and another ", TextType.NORMAL_TEXT),
+                TextNode(
+                    "second image", TextType.IMAGES, "https://i.imgur.com/3elNhQu.png"
+                ),
+            ],
+            new_nodes,
+        )
 
 
 

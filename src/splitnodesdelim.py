@@ -1,4 +1,6 @@
 from src.textnode import TextNode, TextType
+from src.extract_markdown_images import extract_markdown_images
+from src.extract_markdown_links import extract_markdown_links
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     final_nodes = []
@@ -19,3 +21,15 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 else:
                     final_nodes.append(TextNode(split_delim[i], text_type))
             return final_nodes
+
+def split_nodes_image(old_nodes):
+    final_nodes = []
+    for node in old_nodes:
+        print(f'what is node? {node.text}')
+        matches = extract_markdown_images(node.text)
+        print(f'what are the matches? {matches}')
+    return final_nodes
+
+
+def split_nodes_link(old_nodes):
+    pass
