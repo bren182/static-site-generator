@@ -45,7 +45,7 @@ class TestSplitNodesDelim(unittest.TestCase):
         ])
 
     
-    def test_split_images(self):
+    def test_split_images_two(self):
         node = TextNode(
             "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)",
             TextType.NORMAL_TEXT,
@@ -59,6 +59,63 @@ class TestSplitNodesDelim(unittest.TestCase):
                 TextNode(
                     "second image", TextType.IMAGES, "https://i.imgur.com/3elNhQu.png"
                 ),
+            ],
+            new_nodes,
+        )
+
+    def test_split_images_three(self):
+        node = TextNode(
+            "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png) and one last one for ![good measure](https://some.image.result)",
+            TextType.NORMAL_TEXT,
+        )
+        new_nodes = split_nodes_image([node])
+        self.assertListEqual(
+            [
+                TextNode("This is text with an ", TextType.NORMAL_TEXT),
+                TextNode("image", TextType.IMAGES, "https://i.imgur.com/zjjcJKZ.png"),
+                TextNode(" and another ", TextType.NORMAL_TEXT),
+                TextNode(
+                    "second image", TextType.IMAGES, "https://i.imgur.com/3elNhQu.png"
+                ),
+                TextNode(" and one last one for ", TextType.NORMAL_TEXT),
+                TextNode("good measure", TextType.IMAGES, "https://some.image.result")
+            ],
+            new_nodes,
+        )
+    
+    def test_split_links_two(self):
+        node = TextNode(
+            "This is text with a link to [google](https://google.com) and another link [to youtube](https://youtube.com)",
+            TextType.NORMAL_TEXT,
+        )
+        new_nodes = split_nodes_link([node])
+        self.assertListEqual(
+            [
+                TextNode("This is text with a link to ", TextType.NORMAL_TEXT),
+                TextNode("google", TextType.LINKS, "https://google.com"),
+                TextNode(" and another link ", TextType.NORMAL_TEXT),
+                TextNode(
+                    "to youtube", TextType.LINKS, "https://youtube.com"
+                ),
+            ],
+            new_nodes,
+        )
+    
+    def test_split_links_three(self):
+        node = TextNode(
+            "This is text with a link to [google](https://google.com) and another link [to youtube](https://youtube.com)[random link](https://some-random-place.com)",
+            TextType.NORMAL_TEXT,
+        )
+        new_nodes = split_nodes_link([node])
+        self.assertListEqual(
+            [
+                TextNode("This is text with a link to ", TextType.NORMAL_TEXT),
+                TextNode("google", TextType.LINKS, "https://google.com"),
+                TextNode(" and another link ", TextType.NORMAL_TEXT),
+                TextNode(
+                    "to youtube", TextType.LINKS, "https://youtube.com"
+                ),
+                TextNode("random link",TextType.LINKS, "https://some-random-place.com")
             ],
             new_nodes,
         )
