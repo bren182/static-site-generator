@@ -44,8 +44,6 @@ def split_nodes_image(old_nodes):
             final_nodes.append(after_image_text)
     return final_nodes
 
-
-
 def split_nodes_link(old_nodes):
     final_nodes = []
     for node in old_nodes:
