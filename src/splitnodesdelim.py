@@ -74,5 +74,3 @@ def text_to_text_nodes(text):
     #print(f'final nodes after image split! {final_nodes}')
     final_nodes = split_nodes_link(final_nodes)
     return final_nodes
-
-
